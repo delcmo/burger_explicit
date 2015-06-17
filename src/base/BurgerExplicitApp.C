@@ -3,6 +3,19 @@
 #include "AppFactory.h"
 #include "ModulesApp.h"
 
+// kernels
+#include "AdvectionFlux.h"
+#include "ArtificialDissipation.h"
+
+// auxkernels
+#include "Flux.h"
+
+// materials
+#include "EntropyViscosityCoefficient.h"
+
+// postprocessors
+#include "TimeStepCFL.h"
+
 template<>
 InputParameters validParams<BurgerExplicitApp>()
 {
@@ -41,6 +54,19 @@ BurgerExplicitApp::registerApps()
 void
 BurgerExplicitApp::registerObjects(Factory & factory)
 {
+  // kernels
+  registerKernel(AdvectionFlux);
+  registerKernel(ArtificialDissipation);
+
+  // auxkernels
+  registerAux(Flux);
+
+  // materials
+  registerMaterial(EntropyViscosityCoefficient);
+
+  // postprocessors
+  registerPostprocessor(TimeStepCFL);
+
 }
 
 void
